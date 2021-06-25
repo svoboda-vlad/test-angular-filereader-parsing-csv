@@ -1,0 +1,41 @@
+<input type="file" (change)="handleUpload($event)" accept=".csv" />
+
+<div *ngIf="fileRows.length">
+  <h2>File Rows</h2>
+  <div>{{ fileRows.length }} rows</div>
+</div>
+<div *ngIf="fileRows.length == 0" style="color: red">no rows</div>
+
+<div>
+  <button (click)="createMyEntities()">Create My Entities</button>
+</div>
+
+<div *ngIf="invalidRows.length">
+  <h2>Invalid rows</h2> 
+  <div style="color: red">{{ invalidRows.length }} invalid row(s)</div>
+  <table>
+    <tr *ngFor="let invalidRow of invalidRows">
+      <td>{{ invalidRow.rowNo }}</td>
+      <td *ngFor="let column of invalidRow.columns">
+        {{ column }}
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div *ngIf="exchangeRates.length">
+  <h2>Exchange Rates</h2>
+  <div>{{ exchangeRates.length }} valid entities</div>  
+  <table>
+    <tr>
+      <th>Rate Date</th>
+      <th>Rate</th>
+      <th>CurrencyCode</th>      
+    </tr>
+    <tr *ngFor="let exchangeRate of exchangeRates">
+      <td>{{ exchangeRate.rateDate  | date:'d.M.yyyy'  }}</td>
+      <td>{{ exchangeRate.rate }}</td>
+      <td>{{ exchangeRate.currencyCode.currencyCode }}</td>      
+    </tr>
+  </table>
+</div>
